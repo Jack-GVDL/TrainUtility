@@ -25,9 +25,11 @@ INterface_DictData
 
 ### Function
 
-- plotConfusionMatrix
-- plotAccuracy
-- plotLoss
+```python
+plotConfusionMatrix
+plotAccuracy
+plotLoss
+```
 
 ## Example
 
