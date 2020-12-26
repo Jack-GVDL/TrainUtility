@@ -1,5 +1,32 @@
 # Train Utility
 
+## It is still in development stage, i.e. name and content of classes and functions in this library may be changed or removed
+
+Train Utility is a simple utility for training in Pytorch.
+
+## Overview
+
+### Class
+
+- ModelInfo
+- TrainResultInfo
+- TrainProcess
+- TrainProcess_DictLoad
+- TrainProcess_DictSave
+- TrainProcess_Folder
+- TrainProcess_Hook
+- TrainProcess_PythonFile
+- TrainProcess_ResultGraph
+- TrainProcess_ResultRecord
+- Interface_CodePath
+- INterface_DictData
+
+### Function
+
+- plotConfusionMatrix
+- plotAccuracy
+- plotLoss
+
 ## Example
 
 ### Create ModelInfo
@@ -61,3 +88,15 @@ Here we need to trigger ```TrainProcess_Folder``` at ```TRAIN_END``` stage.
 # what inside data is depended on different stage and user is free to add more into it
 info.executeProcess(ModelInfo.Stage.TRAIN_END, data)
 ```
+
+### Save Epoch Result
+
+TODO: **Not yet completed**
+
+### Plot Graph
+
+TODO: **Not yet completed**
+
+## Repo that Use this Library
+
+- [FastRCNN](https://github.com/Jack-GVDL/FastRCNN)
