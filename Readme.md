@@ -74,6 +74,9 @@ process = TrainProcess_Folder()
 # we need to further fill more information for TrainProcess_Folder
 info.save_path      = "./Result"
 info.save_folder    = "Result_xxx"
+
+# add TrainProcess_Folder to ModelInfo
+info.process_list.append(process)
 ```
 
 To trigger the process, we need to call the ```ModelInfo.executeProcess(stage, info)```. There are some default stages in ```ModelInfo.Stage```.
@@ -88,6 +91,12 @@ To trigger the process, we need to call the ```ModelInfo.executeProcess(stage, i
 Here we need to trigger ```TrainProcess_Folder``` at ```TRAIN_END``` stage.
 
 ```python
+# ----- init -----
+# acutally we don't need to set this
+# ModelInfo.Stage.TRAIN is added to TrainProcess_Folder.stage in __init___
+process.stage = [ModelInfo.Stage.TRAIN_END]
+
+# ----- train end ------
 # data: Dict
 # what inside data is depended on different stage and user is free to add more into it
 info.executeProcess(ModelInfo.Stage.TRAIN_END, data)
