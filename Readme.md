@@ -112,4 +112,4 @@ TODO: **Not yet completed**
 
 ## Repo that Use this Library
 
-- [FastRCNN](https://github.com/Jack-GVDL/FastRCNN)
+- [https://github.com/Jack-GVDL/FastRCNN](https://github.com/Jack-GVDL/FastRCNN)
