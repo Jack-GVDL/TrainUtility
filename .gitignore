@@ -1,6 +1,7 @@
 # folder
 Document
 __pycache__
+.idea
 
 # file type
 *.npy

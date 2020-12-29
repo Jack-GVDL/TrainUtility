@@ -1,6 +1,7 @@
 from typing import *
 import numpy as np
 from .Util_Interface import Interface_DictData
+from .TrainProcess import TrainProcessControl
 
 
 # Data Structure
@@ -103,34 +104,6 @@ class TrainResultInfo:
 		return 2 * (recall * precision) / (recall + precision)
 
 
-class TrainProcess:
-
-	def __init__(self):
-		super().__init__()
-
-		# data
-		self.stage:		List[int]	= []
-		self.is_log:	bool		= False
-		self.is_print:	bool		= False
-
-		# operation
-		# ...
-
-	def __del__(self):
-		return
-
-	# Operation
-	# data in variable "data" will be different at different stage
-	def execute(self, stage: int, info: Any, data: Dict) -> None:
-		raise NotImplementedError
-
-	def getLogContent(self, stage: int, info: Any) -> str:
-		return "Process unknown"
-
-	def getPrintContent(self, stage: int, info: Any) -> str:
-		return "Process unknown"
-
-
 class ModelInfo(Interface_DictData):
 
 	# TODO: find a better way
@@ -176,7 +149,7 @@ class ModelInfo(Interface_DictData):
 		self.result_list: List[List[TrainResultInfo]] = []
 
 		# pre/post processing
-		self.process_list: List[TrainProcess] = []
+		self.process_control: TrainProcessControl = TrainProcessControl()
 
 		# data will be changed in the operation
 		self.iteration:	int = 0
@@ -197,20 +170,7 @@ class ModelInfo(Interface_DictData):
 
 	# Operation
 	def executeProcess(self, stage: int, data: Dict) -> None:
-		# get process that needed to be executed
-		process_list = filter(lambda x: (stage in x.stage), self.process_list)
-
-		# foreach process
-		for process in process_list:
-			process.execute(stage, self, data)
-
-			# logging
-			if process.is_log:
-				self.log.append(process.getLogContent(stage, self))
-
-			# print to screen (to stdout)
-			if process.is_print:
-				print(process.getPrintContent(stage, self))
+		self.process_control.execute(stage, self, data, self.log)
 
 	def getDictData(self) -> Dict:
 		iteration_list: List[Dict] = []
